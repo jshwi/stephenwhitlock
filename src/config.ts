@@ -19,5 +19,5 @@ export const SITE = {
   dynamicOgImage: true,
   dir: "ltr",
   lang: "en",
-  timezone: "Asia/Bangkok",
+  timezone: "Australia/Sydney",
 } as const;
