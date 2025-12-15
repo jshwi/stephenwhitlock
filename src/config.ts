@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://www.stephenwhitlock.com/",
   author: "Stephen Whitlock",
   profile: "https://www.stephenwhitlock.com/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Stephen's Blog",
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
