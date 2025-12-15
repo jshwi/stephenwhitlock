@@ -3,7 +3,7 @@ export const SITE = {
   author: "Stephen Whitlock",
   profile: "https://www.stephenwhitlock.com/",
   desc: "Stephen's Blog",
-  title: "AstroPaper",
+  title: "Stephen Whitlock",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
