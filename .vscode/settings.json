@@ -1,0 +1,17 @@
+{
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 80,
+  "[markdown]": {
+    "editor.wordWrap": "off"
+  },
+  "[astro]": {
+    "editor.wordWrap": "off"
+  },
+  "[typescript]": {
+    "editor.wordWrap": "off"
+  },
+  "[javascript]": {
+    "editor.wordWrap": "off"
+  }
+}
+
