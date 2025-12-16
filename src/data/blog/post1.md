@@ -3,7 +3,14 @@ title: Adding versioning to Flask-SQLAlchemy with SQLAlchemy-Continuum
 pubDatetime: 2025-12-15T05:17:00
 slug: adding-versioning-to-flask-sqlalchemy-with-sqlalchemy-continuum
 tags:
+  - database
+  - flask
+  - python
+  - sql
+  - sqlalchemy
   - sqlalechmy-continuum
+  - versioning
+  - web
 description: Versioning with Flask-SQLAlchemy and SQLAlchemy-Continuum
 ---
 

@@ -3,7 +3,10 @@ title: Integrating Flask-Admin with the app factory pattern
 pubDatetime: 2025-12-15T05:18:15
 slug: integrating-flask-admin-with-the-app-factory-pattern
 tags:
+  - flask
   - flask-admin
+  - python
+  - web
 description: Factory pattern with Flask-Admin
 ---
 

@@ -3,7 +3,11 @@ title: Docsig
 pubDatetime: 2025-12-15T05:18:35
 slug: docsig
 tags:
+  - ci
   - docsig
+  - documentation
+  - docstring
+  - python
 description: Check signature params for proper documentation
 ---
 
