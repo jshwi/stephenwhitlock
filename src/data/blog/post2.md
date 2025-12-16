@@ -7,24 +7,24 @@ tags:
 description: Factory pattern with Flask-Admin
 ---
 
-If you are entering `Flask` from `django` you'll notice that `Flask` doesn't 
-come with an admin interface. As per the `django` documentation for its admin 
+If you are entering `Flask` from `django` you'll notice that `Flask` doesn't
+come with an admin interface. As per the `django` documentation for its admin
 interface:
 
 One of the most powerful parts of Django is the automatic admin interface.
 One of the most powerful parts about `Flask`, however, is its lack of these things. Everything is up to you as the developer.
 
-`Flask-Admin` can be used to set up an admin interface, so you can manage your 
+`Flask-Admin` can be used to set up an admin interface, so you can manage your
 database through your browser.
 
-There are 3 main issues, I found, when using `Flassk-Admin` features 
+There are 3 main issues, I found, when using `Flassk-Admin` features
 out-of-the-box
 
-It does not offer, for reasons of opinion, any security provisions; for this 
+It does not offer, for reasons of opinion, any security provisions; for this
 we'll use `Flask-Login`
 It reserves end point prefixes that you may want to use for other routes
 it does not use the [app factory pattern](https://flask.palletsprojects.com/en/2.0.x/patterns/appfactories/)
-(any attempt to use the app factory pattern will result in an error): This is 
+(any attempt to use the app factory pattern will result in an error): This is
 due to the extension registering its blueprints on instantiation
 
 ```text
@@ -37,12 +37,12 @@ AssertionError: A blueprint's name collision occurred between <flask.blueprints.
 $ pip install flask-admin flask-login
 ```
 
-For a package to be recognised as an official `Flask` extension it should 
-include the `init_app` method, so that the app does not need to passed directly 
-to the extension upon instantiation. This enables the extension to be passed 
-around within the app's modules before it even exists. This prevents circular 
+For a package to be recognised as an official `Flask` extension it should
+include the `init_app` method, so that the app does not need to passed directly
+to the extension upon instantiation. This enables the extension to be passed
+around within the app's modules before it even exists. This prevents circular
 imports, as is the reason for the app factory pattern. Luckily, `Flask-Admin`
-does not need to passed around, and therefore works when it is instantiated 
+does not need to passed around, and therefore works when it is instantiated
 with the app object.
 
 Your `extensions` module might look like something like this
@@ -89,9 +89,9 @@ Create a new app/admin.py module and write up a new `init_app` function
 
 Solution to 1
 
-`Flask-Login` comes with the extremely useful `login_required` decorator. Put 
-this on top of your routes, and the user is required to be logged in to access 
-it. We can do this with an admin user too. Add a boolean value to your user 
+`Flask-Login` comes with the extremely useful `login_required` decorator. Put
+this on top of your routes, and the user is required to be logged in to access
+it. We can do this with an admin user too. Add a boolean value to your user
 model; `admin`
 
 ```python file=app/models.py
@@ -111,9 +111,9 @@ class User(UserMixin, db.Model):
 ...
 ```
 
-Now we can decorate the `login_required` functionality with a more restricted, 
-`admin` function. `login_required` , under the hood, returns a 
-`LoginManager.unauthorized` function if the user is not logged in. This raises, 
+Now we can decorate the `login_required` functionality with a more restricted,
+`admin` function. `login_required` , under the hood, returns a
+`LoginManager.unauthorized` function if the user is not logged in. This raises,
 among other things, raises a `401 Unauthorized` error.
 
 How you make your user an admin is pretty simple, but I won't go into it here.
@@ -143,11 +143,11 @@ def admin_required(func):
     return _wrapped_view
 ```
 
-Create a new admin.py module. `Flask-Admin`, by default, constructs its index 
-page with the `AdminIndexView` class. We can override this class and its 
-`index` method to be decorated with our `admin_required` function. Make sure to 
-continue using `login_required` as a sort of hierarchy of logins, otherwise the 
-`admin_required` decorator will fail. This is because the decorator needs the 
+Create a new admin.py module. `Flask-Admin`, by default, constructs its index
+page with the `AdminIndexView` class. We can override this class and its
+`index` method to be decorated with our `admin_required` function. Make sure to
+continue using `login_required` as a sort of hierarchy of logins, otherwise the
+`admin_required` decorator will fail. This is because the decorator needs the
 user to logged in to check for admin.
 
 ```python file=app/admin.py
@@ -186,10 +186,10 @@ def init_app(app):
 
 Solution to problem 2
 
-We can subclass `flask_admin.contrib.sqla.ModelView` to register their 
+We can subclass `flask_admin.contrib.sqla.ModelView` to register their
 blueprints under a different name.
 
-Now you can use the `/user` , `/post` , etc. prefixes on your user, post etc. 
+Now you can use the `/user` , `/post` , etc. prefixes on your user, post etc.
 routes, and not waste them on the admin routes.
 
 Because the views display, usually, multiple user, post etc. tables, it makes sense to end them as a plural.

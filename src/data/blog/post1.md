@@ -7,16 +7,16 @@ tags:
 description: Versioning with Flask-SQLAlchemy and SQLAlchemy-Continuum
 ---
 
-`SQLAlchemy` has a limited versioning extension that does not support entire 
-transactions. 
-[SQLAlchemy-Continuum](https://pypi.org/project/SQLAlchemy-Continuum/) offers a 
+`SQLAlchemy` has a limited versioning extension that does not support entire
+transactions.
+[SQLAlchemy-Continuum](https://pypi.org/project/SQLAlchemy-Continuum/) offers a
 flexible API for implementing a versioning mechanism to your `SQLAlchemy`
-[ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) 
+[ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
 database.
 
-If you want to ensure nothing is lost after editing your database I have found 
-this package to be a good place to start. There are drawbacks when it comes to 
-data retention; hashing algorithms and data compression aren't built into the 
+If you want to ensure nothing is lost after editing your database I have found
+this package to be a good place to start. There are drawbacks when it comes to
+data retention; hashing algorithms and data compression aren't built into the
 API.
 
 This article assumes you are using `Flask-SQLAlchemy`.
@@ -25,8 +25,8 @@ This article assumes you are using `Flask-SQLAlchemy`.
 $ pip install sqlalchemy-continuum
 ```
 
-In the module where your `SQLAlchemy` models are defined call 
-`make_versioned()` before their definition and add `__versioned__` to all 
+In the module where your `SQLAlchemy` models are defined call
+`make_versioned()` before their definition and add `__versioned__` to all
 models you wish to add versioning to.
 
 ```python file=app/models.py
@@ -66,7 +66,7 @@ post.versions[revision].revert()
 db.session.commit()
 ```
 
-With the above, a third item has been added to `post.versions` , which is 
+With the above, a third item has been added to `post.versions` , which is
 basically a duplicate of the first.
 
 We can then craft a route that will restore the previous version:
@@ -93,18 +93,18 @@ def version(id, revision):
 
 Accessing `/1/version/1` after your URL will restore version 1 from post 1
 
-If you already have an update view, much like the one demonstrated here 
-https://flask.palletsprojects.com/en/2.0.x/tutorial/blog/ then we can also 
-load the previous version with a query-string. With this we don't have to 
+If you already have an update view, much like the one demonstrated here
+https://flask.palletsprojects.com/en/2.0.x/tutorial/blog/ then we can also
+load the previous version with a query-string. With this we don't have to
 blindly restore versions (and add more duplicate versions along the way).
 
-by default, the revision returned will be the last one i.e. `/1/update` is the 
+by default, the revision returned will be the last one i.e. `/1/update` is the
 same as `/1/update?revision=-1`.
 
-This time we will return the version object - this way the form will be 
-pre-loaded with the revision. Once the form's submission is validated the 
-current `post` object will be replaced with restored revision. Once this is 
-committed either a duplicate or edited version will be added to 
+This time we will return the version object - this way the form will be
+pre-loaded with the revision. Once the form's submission is validated the
+current `post` object will be replaced with restored revision. Once this is
+committed either a duplicate or edited version will be added to
 `post.versions`.
 
 ```python
@@ -122,23 +122,23 @@ bp = Blueprint("views", __name__)
 def update(id):
     # by default, revision returned will be the last one
     revision = request.args.get("revision", -1, type=int)
-    
+
     post = Post.query.get(id=id)
-    
+
     # this time we will return the version object
     version = post.versions[revision]
-    
+
     # this way the form will be preloaded with the revision
     form = PostForm(title=version.title, body=version.body)
-    
-    # once the form's submit button is pressed the current `post` object 
+
+    # once the form's submit button is pressed the current `post` object
     # will be replaced with restored revision
     if form.validate_on_submit():
         post.title = form.title.data
         post.body = form.body.data
         ...
-        
-        # once this is committed either a duplicate or edited version 
+
+        # once this is committed either a duplicate or edited version
         # will be added to `post.versions`
         db.session.commit()
         return redirect(url_for("views.index"))
