@@ -207,7 +207,7 @@ It can be added to your .pre-commit-config.yaml as follows:
 
 Standalone
 
-```yaml  file=.pre-commit-config.yaml
+```yaml file=.pre-commit-config.yaml
 repos:
   - repo: https://github.com/jshwi/docsig
     rev: v0.72.0
