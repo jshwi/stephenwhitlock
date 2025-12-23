@@ -1,43 +1,25 @@
 ---
-title: Docsig
+title: Check signature params for proper documentation
 pubDatetime: 2025-12-15T05:18:35
-slug: docsig
+slug: check-signature-params-for-proper-documentation
 tags:
   - ci
   - docsig
   - documentation
   - docstring
   - python
-description: Check signature params for proper documentation
+description: reStructuredText (`Sphinx`), `NumPy`, and `Google`
 ---
 
 ![docsig logo](https://raw.githubusercontent.com/jshwi/docsig/master/docs/static/docsig.svg)
 
-<div class="badges">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  <img src="https://img.shields.io/pypi/v/docsig" />
-  <img src="https://github.com/jshwi/docsig/actions/workflows/build.yaml/badge.svg" />
-  <img src="https://results.pre-commit.ci/badge/github/jshwi/docsig/master.svg" />
-  <img src="https://codecov.io/gh/jshwi/docsig/branch/master/graph/badge.svg" />
-  <img src="https://readthedocs.org/projects/docsig/badge/?version=latest" />
-  <img src="https://img.shields.io/badge/python-3.10-blue.svg" />
-  <img src="https://img.shields.io/badge/code%20style-black-000000.svg" />
-  <img src="https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336" />
-  <img src="https://img.shields.io/badge/linting-pylint-yellowgreen" />
-  <img src="https://img.shields.io/badge/security-bandit-yellow.svg" />
-  <img src="https://snyk.io/test/github/jshwi/docsig/badge.svg" />
-  <img src="https://snyk.io/advisor/python/docsig/badge.svg" />
-</div>
+`docsig` is a tool for ensuring signature parameters are correctly documented.
 
-# Check signature params for proper documentation
+There is no one standard for how docstring parameters should be documented, and so with `docsig`, you can lay down a policy and stick to it, resulting in more accurate documentation.
 
-Supports reStructuredText (`Sphinx`), `NumPy`, and `Google`
+Documenting your parameters is important, but very easy to neglect, especially when parameters belonging to a function or method change frequently.
 
-# Contributing
-
-If you are interested in contributing to `docsig` please read about
-contributing
-[here](https://docsig.io/en/latest/development/contributing.html)
+`docsig` will help you keep your docstrings up-to-date and informative
 
 # Installation
 
